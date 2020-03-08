@@ -9,18 +9,12 @@ Gaddag::Gaddag(){
         exit(1);
     }
 
+    //put words into gaddag
     std::string word;
-    int a = 0;
-    do{
-        std::cout << word << ": ";
-        for (int i = 0; i < word.length(); i++)
-            std::cout << word.at(i) << " (" << (int)word.at(i) - 65 << ") ";
-        std::cout << std::endl;
-        if (word.length() > 0)
-            insertion(word);
-        a++;
-    } while ((fileToRead >> word) && (a < 10));
-
+    while (fileToRead >> word)
+        insertion(word);
+    
+    
     //close the file
     fileToRead.close();
 }
@@ -51,18 +45,28 @@ void Gaddag::insertion(std::string word){
 }
 
 bool Gaddag::recherche(std::string word){
+    std::cout << "Search for the letter " << word << "...";
     Noeud *temp = fils;
     int index;
     for (int i = 0; i < word.length(); i++){
         index = (int)word.at(i) - 65;
-        if (temp->fils[index] == nullptr)
+        if (temp->fils[index] == nullptr){
+            std::cout << "Not matching (letter " << word.at(i) << " not exists)." << std::endl;
             return false;
-        if (i == word.length() - 1){
-                if (temp->fils[index]->terminal)
-                    return true;
-                else return false;
         }
+        if (i == word.length() - 1){
+                if (temp->fils[index]->terminal){
+                    std::cout << "Matching!" << std::endl;
+                    return true;
+                }
+                else {
+                    std::cout << "Not matching (letter " << word.at(i) << " is not a final letter)." << std::endl;
+                    return false;
+                }
+        }
+        std::cout << ".";
         temp = temp->fils[index];
     }
+    std::cout << "Not matching (unknown error).";
     return false;
 }

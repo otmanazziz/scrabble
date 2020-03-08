@@ -13,13 +13,11 @@ int main() {
 
   Gaddag g;
 
-  if (g.recherche("AA"))
-    std::cout << "AA vrai" << std::endl;
-  else std::cout << "AA faux" << std::endl;
-
-  if (g.recherche("AALENIEN"))
-    std::cout << "AALENIEN vrai" << std::endl;
-  else std::cout << "AALENIEN faux" << std::endl;
+  g.recherche("AA");
+  g.recherche("AAB");
+  g.recherche("A");
+  g.recherche("AB");
+  g.recherche("CRAMPE");
 
   //SacLettres *s = new SacLettres();
 
