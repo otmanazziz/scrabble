@@ -7,29 +7,27 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
+
 int main() {
 
   srand(time(NULL));
 
   Gaddag g;
+  std::string word;
 
-  g.recherche("AA");
-  g.recherche("AAB");
-  g.recherche("A");
-  g.recherche("AB");
-  g.recherche("CRAMPE");
+  
 
-  //SacLettres *s = new SacLettres();
+  SacLettres *s = new SacLettres();
 
-  //Joueur j1(s);
+  Joueur j1(s);
   
 
   //std::cout << s.nbLettres;
 
-  //Board b ;
+  Board b ;
 
   //std::cout << b << std::endl;
-/*
+
   std::stringstream ss ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
@@ -49,7 +47,13 @@ int main() {
 
   b.load(ss) ;
 
-  std::cout << b << std::endl ;*/
+  std::cout << b << std::endl ;
+
+  while (true){
+    std::cout << "Please type a word... ";
+    std::cin >> word;
+    g.recherche(word);
+  }
 
   return 0 ;
 }

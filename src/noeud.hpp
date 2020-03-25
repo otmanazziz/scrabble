@@ -3,7 +3,7 @@
 
 struct Noeud{
     bool terminal;
-    Noeud* fils[26];
+    Noeud* fils[27];
 
     Noeud();
 
