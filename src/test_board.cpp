@@ -23,7 +23,7 @@ int main() {
   Board b ;
 
   std::stringstream ss ;
-  ss << "K.............." << std::endl ;
+  ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;

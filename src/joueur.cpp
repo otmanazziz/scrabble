@@ -38,10 +38,11 @@ std::string Joueur::informations(){
 
 void Joueur::lister_coups(Board b, Noeud n[27]){
     p = new Pile();
-    int line, col;
 
     for (int i = 0; i < 15; i++){
         for (int j = 0; j < 15; j++){
+
+            int line, col;
 
             if (b(i, j).letter == 0){
                 if (i > 0 && i < 14 && j > 0 && j < 14){
@@ -127,6 +128,13 @@ void Joueur::lister_coups(Board b, Noeud n[27]){
                         }
                     }
                 }
+            }
+
+
+            if (line == i && col == j){
+                std::cout << "Letter[" << line << ", " << col << "]\n";
+                p->listerEtats(b, n, mainJoueur, line, col, true);
+                p->listerEtats(b, n, mainJoueur, line, col, false);
             }
 
         }

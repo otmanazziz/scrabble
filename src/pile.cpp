@@ -38,3 +38,7 @@ std::string Pile::informations(){
     res += "********************************************************\n";
     return res;
 }
+
+void Pile::listerEtats(Board b, Noeud n[27], std::vector<Lettre> hand, int line, int col, bool vertical){
+    
+}

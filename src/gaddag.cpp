@@ -30,7 +30,7 @@ Gaddag::~Gaddag(){
 void Gaddag::insertion(std::string word){
 
     //classic implementation of the word
-    classicInsertion(word);
+    //classicInsertion(word);
 
     //implementation of the word with "+" letter
     plusInsertion(word);
