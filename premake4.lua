@@ -40,7 +40,9 @@ common_files = {
   "src/Lettre.hpp", "src/Lettre.cpp",
   "src/joueur.hpp", "src/joueur.cpp",
   "src/noeud.hpp", "src/noeud.cpp",
-  "src/gaddag.hpp", "src/gaddag.cpp"
+  "src/gaddag.hpp", "src/gaddag.cpp",
+  "src/etat.hpp", "src/etat.cpp",
+  "src/pile.hpp", "src/pile.cpp"
 }
 
 -- Pour chaque exécutable que vous souhaitez générer, ajoutez un nouveau projet

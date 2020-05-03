@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 
 struct Lettre{
@@ -11,5 +13,5 @@ struct Lettre{
 
     ~Lettre();
 
-    void informations();
+    std::string informations();
 };

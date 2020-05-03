@@ -16,6 +16,9 @@ Lettre::~Lettre(){
     points = NULL;
 }
 
-void Lettre::informations(){
-    std::cout << lettre << "(" << points << " points)";
+std::string Lettre::informations(){
+    std::string res;
+    res.push_back(lettre);
+    res += "(" + std::to_string(points) + ")";
+    return res;
 }

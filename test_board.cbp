@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="test_board" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="debug">
+				<Option output="bin/test_board" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/debug" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DDEBUG" />
+					<Add option="-mtune=native -march=native" />
+					<Add option="-std=c++11" />
+					<Add option="-W -Wall -Wextra" />
+					<Add option="-pipe" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-g" />
+				</Linker>
+			</Target>
+			<Target title="release">
+				<Option output="bin/test_board" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/release" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-mtune=native -march=native" />
+					<Add option="-std=c++11" />
+					<Add option="-W -Wall -Wextra" />
+					<Add option="-pipe" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="src/board.hpp">
+		</Unit>
+		<Unit filename="src/board.cpp">
+		</Unit>
+		<Unit filename="src/spot.hpp">
+		</Unit>
+		<Unit filename="src/spot.cpp">
+		</Unit>
+		<Unit filename="src/bonus.hpp">
+		</Unit>
+		<Unit filename="src/bonus.cpp">
+		</Unit>
+		<Unit filename="src/sac_lettres.hpp">
+		</Unit>
+		<Unit filename="src/sac_lettres.cpp">
+		</Unit>
+		<Unit filename="src/Lettre.hpp">
+		</Unit>
+		<Unit filename="src/Lettre.cpp">
+		</Unit>
+		<Unit filename="src/joueur.hpp">
+		</Unit>
+		<Unit filename="src/joueur.cpp">
+		</Unit>
+		<Unit filename="src/noeud.hpp">
+		</Unit>
+		<Unit filename="src/noeud.cpp">
+		</Unit>
+		<Unit filename="src/gaddag.hpp">
+		</Unit>
+		<Unit filename="src/gaddag.cpp">
+		</Unit>
+		<Unit filename="src/etat.hpp">
+		</Unit>
+		<Unit filename="src/etat.cpp">
+		</Unit>
+		<Unit filename="src/pile.hpp">
+		</Unit>
+		<Unit filename="src/pile.cpp">
+		</Unit>
+		<Unit filename="src/test_board.cpp">
+		</Unit>
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
+

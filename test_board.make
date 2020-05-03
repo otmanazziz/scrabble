@@ -72,6 +72,8 @@ OBJECTS := \
 	$(OBJDIR)/joueur.o \
 	$(OBJDIR)/noeud.o \
 	$(OBJDIR)/gaddag.o \
+	$(OBJDIR)/etat.o \
+	$(OBJDIR)/pile.o \
 	$(OBJDIR)/test_board.o \
 
 RESOURCES := \
@@ -155,6 +157,12 @@ $(OBJDIR)/noeud.o: src/noeud.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/gaddag.o: src/gaddag.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/etat.o: src/etat.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+$(OBJDIR)/pile.o: src/pile.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 $(OBJDIR)/test_board.o: src/test_board.cpp

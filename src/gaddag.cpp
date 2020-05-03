@@ -83,7 +83,6 @@ void Gaddag::plusInsertion(std::string word){
     }
 
 
-
 }
 
 bool Gaddag::recherche(std::string word){
