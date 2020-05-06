@@ -1,12 +1,18 @@
 #include "etat.hpp"
 
-Etat::Etat(Board b, Noeud n[27], std::vector<Lettre> l){
+Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr){
     this->b = b;
     
-    for (int i = 0; i < 27; i++)
-        this->n[i] = new Noeud(n[i]);
+    this->n = new Noeud(n);
 
     this->hand = l;
+
+    this->l_initial = lini;
+    this->c_initial = cini;
+    this->l = ll;
+    this->c = cc;
+    this->horizontal = hori;
+    this->arriere = arr;
 }
 
 Etat::~Etat(){

@@ -36,10 +36,10 @@ std::string Joueur::informations(){
     }
 }
 
-void Joueur::lister_coups(Board b, Noeud n[27]){
+void Joueur::lister_coups(Board b, Noeud n){
     p = new Pile();
 
-    for (int i = 0; i < 15; i++){
+    /*for (int i = 0; i < 15; i++){
         for (int j = 0; j < 15; j++){
 
             int line, col;
@@ -138,9 +138,13 @@ void Joueur::lister_coups(Board b, Noeud n[27]){
             }
 
         }
-    }
-    
-    p->empiler(Etat(b, n, mainJoueur));
+    }*/
 
-    std::cout << p->informations();
+    p->empiler(Etat(b, n, mainJoueur, 4, 8, 4, 8, true, true));
+
+    //p->listerEtats();
+    
+    //p->empiler(Etat(b, n, mainJoueur));
+
+    //std::cout << p->informations();
 }

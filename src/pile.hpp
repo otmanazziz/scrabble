@@ -19,6 +19,6 @@ struct Pile{
 
     std::string informations();
 
-    void listerEtats(Board b, Noeud n[27], std::vector<Lettre> hand, int line, int col, bool vertical);
+    void listerEtats();
 
 };

@@ -90,7 +90,10 @@ bool Gaddag::recherche(std::string word){
     Noeud *temp = fils;
     int index;
     for (int i = 0; i < word.length(); i++){
-        index = (int)word.at(i) - 65;
+        if (word.at(i) == '+')
+            index = 26;
+        else index = (int)word.at(i) - 65;
+        
         if (temp->fils[index] == nullptr){
             std::cout << "Not matching (letter " << word.at(i) << " not exists)." << std::endl;
             return false;

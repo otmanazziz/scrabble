@@ -15,6 +15,8 @@ int main() {
   srand(time(NULL));
 
   Gaddag g;
+  g.recherche("TEST");
+  g.recherche("B+ATEAU");
 
   SacLettres *s = new SacLettres();
 
