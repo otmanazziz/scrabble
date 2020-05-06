@@ -37,6 +37,7 @@ std::string Joueur::informations(){
 }
 
 void Joueur::lister_coups(Board b, Noeud n){
+    std::cout << "Préparation de la liste des coups.. Mais avant regardez le plateau initial avec la main du Joueur.\n";
     p = new Pile();
 
     /*for (int i = 0; i < 15; i++){
@@ -141,10 +142,13 @@ void Joueur::lister_coups(Board b, Noeud n){
     }*/
 
     p->empiler(Etat(b, n, mainJoueur, 4, 8, 4, 8, true, true));
+    //std::cout << p->informations();
 
-    //p->listerEtats();
+    std::cout << "Maintenant nous allons lister les coups possibles...\n";
+
+    p->listerEtats();
     
     //p->empiler(Etat(b, n, mainJoueur));
 
-    //std::cout << p->informations();
+    
 }

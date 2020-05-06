@@ -14,7 +14,12 @@ void Pile::empiler(Etat e){
 }
 
 void Pile::depiler(){
-    etats.pop();
+    
+    if (etats.size() > 0){
+        std::cout << "Etat dépilé.";
+        etats.pop();
+    } else std::cout << "[ERREUR] Pile vide.";
+        
 }
 
 Etat Pile::getEtat(){
@@ -42,28 +47,42 @@ std::string Pile::informations(){
 void Pile::listerEtats(){
 
     Etat temp = etats.top();
+
+    std::cout << "Main actuelle du joueur: [";
+    for (int i = 0; i < temp.hand.size(); i++){
+        std::cout << temp.hand[i].informations() << " ";
+    }
+    std::cout << "] aux coordonnées (" << temp.l << ", " << temp.c << ")\n";
+
     depiler();
+
+    //this->empiler(Etat(temp.b, temp.n->fils[24], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c, temp.horizontal, temp.arriere));
 
     if (temp.b(temp.l, temp.c).letter == NULL){
 
-        if (temp.hand.size() > 0){
-            //plus r a faire
+        std::cout << "--> (" << temp.l << ", " << temp.c << ") vide. ";
+
+        if (temp.hand.size() == 0){
+            std::cout << "Main vide. [FIN]\n";
         } else {
 
             for (int i = 0; i < temp.hand.size(); i++){
 
-                if (temp.n[(int)temp.hand[i].lettre - 65].fils != nullptr){
+                if (temp.n->fils[(int)temp.hand[i].lettre - 65] != nullptr){
+
+                    std::cout << temp.hand[i].lettre << " dispo. ";
                     
                     temp.b(temp.l, temp.c).letter = temp.hand[i].lettre;
+                    temp.hand.erase(temp.hand.begin() + i);
 
                     if (temp.horizontal){ //horizontal
                         if (temp.arriere)
-                            this->empiler(Etat(temp.b, temp.n[(int)temp.hand[i].lettre - 65], temp.hand.erase(temp.hand.begin() + i), temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                        else return;//empiler(Etat(temp->b, temp->n[(int)temp->hand[i].lettre - 65]->fils, temp->hand.erase(temp->hand.begin() + i), temp->l_initial, temp->c_initial, temp->l, temp->c + 1, temp->horizontal, temp->arriere));
+                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
                     } else { //vertical
                         if (temp.arriere)
-                            return;//this->empiler(Etat(temp.b, temp.n[(int)temp.hand[i].lettre - 65], temp.hand.erase(temp.hand.begin() + i), temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                        else return;//empiler(Etat(temp->b, temp->n[(int)temp->hand[i].lettre - 65]->fils, temp->hand.erase(temp->hand.begin() + i), temp->l_initial, temp->c_initial, temp->l + 1, temp->c, temp->horizontal, temp->arriere));
+                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
                     }
                     
                 }
@@ -73,24 +92,32 @@ void Pile::listerEtats(){
 
         }
 
-    }/* else { // lettre existante
+    } else { // lettre existante
 
-        if (temp.n[temp.b(temp.l, temp.c).letter - 65] != nullptr){
+        std::cout << "--> (" << temp.l << ", " << temp.c << ") non vide. ";
+
+        if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65] != nullptr){
+
+            std::cout << temp.b(temp.l, temp.c) << " dispo. ";
+
             if (temp.horizontal){ //horizontal
                 if (temp.arriere)
-                    empiler(Etat(temp.b, temp.n[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                else empiler(Etat(temp.b, temp.n[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                    empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                else empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
             } else { //vertical
                 if (temp.arriere)
-                    empiler(Etat(temp.b, temp.n[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                else empiler(Etat(temp.b, temp.n[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                    empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                else empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
             }
         }
 
     }
 
     //+ est dans le noeud
-    if (temp.n[26] != nullptr){
+    if (temp.n->fils[26] != nullptr){
+
+        std::cout << "+ dispo. On va vers l'avant. ";
+
         if (temp.horizontal){
             if (temp.b(temp.l, temp.c - 1).letter == NULL){
                 temp.arriere = false;
@@ -104,9 +131,11 @@ void Pile::listerEtats(){
         }
     }
 
-    if (temp.n[temp.b(temp.l, temp.c).letter - 65]->terminal){
+    if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65]->terminal){
+        std::cout << "Nous avons une solution!\n";
         std::cout << temp.informations();
     }
-    */
+
+    this->listerEtats();
 
 }

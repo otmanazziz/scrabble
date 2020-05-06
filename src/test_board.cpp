@@ -47,7 +47,7 @@ int main() {
 
   //std::cout << b(7, 8).letter << std::endl;
 
-  j1.lister_coups(b, g.fils);
+  j1.lister_coups(b, new Noeud(g.fils));
 
   //std::cout << b << std::endl ;
 

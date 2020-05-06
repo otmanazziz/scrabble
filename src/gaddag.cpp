@@ -1,9 +1,12 @@
 #include "gaddag.hpp"
 
 Gaddag::Gaddag(){
+
+    std::ifstream fileToRead;
     //read the file
     std::cout << "Ouverture du dictionnaire en cours...";
     fileToRead.open("data/dico.txt");
+
     //check if we can open the file
     if (!fileToRead){
         std::cerr << "Unable to open file dico.txt";
@@ -14,17 +17,17 @@ Gaddag::Gaddag(){
     std::cout << "Création du GADDAG en cours...";
     //put words into gaddag
     std::string word;
-    while (fileToRead >> word)
+    while (fileToRead >> word){
         insertion(word);
-    
-    
+    }
+        
     //close the file
     fileToRead.close();
     std::cout << " OK." << std::endl;
 }
 
 Gaddag::~Gaddag(){
-    
+    //delete(fils);
 }
 
 void Gaddag::insertion(std::string word){

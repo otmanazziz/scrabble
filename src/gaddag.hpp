@@ -8,7 +8,7 @@
 #include "noeud.hpp"
 
 struct Gaddag{
-    std::ifstream fileToRead;
+    
     Noeud fils[27];
 
     Gaddag();
