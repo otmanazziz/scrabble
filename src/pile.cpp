@@ -48,7 +48,7 @@ void Pile::listerEtats(){
 
     Etat temp = etats.top();
 
-    std::cout << "Main actuelle du joueur: [";
+    std::cout << "\n\nMain actuelle du joueur: [";
     for (int i = 0; i < temp.hand.size(); i++){
         std::cout << temp.hand[i].informations() << " ";
     }
@@ -73,19 +73,22 @@ void Pile::listerEtats(){
                     std::cout << temp.hand[i].lettre << " dispo. ";
                     
                     temp.b(temp.l, temp.c).letter = temp.hand[i].lettre;
-                    temp.hand.erase(temp.hand.begin() + i);
+                    std::vector<Lettre> hand = temp.hand;
+                    hand.erase(hand.begin() + i);
 
                     if (temp.horizontal){ //horizontal
                         if (temp.arriere)
-                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
                     } else { //vertical
                         if (temp.arriere)
-                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
                     }
                     
                 }
+
+                //std::cout << temp.informations();
 
             }
             
@@ -94,7 +97,7 @@ void Pile::listerEtats(){
 
     } else { // lettre existante
 
-        std::cout << "--> (" << temp.l << ", " << temp.c << ") non vide. ";
+        std::cout << "--> (" << temp.l << ", " << temp.c << ") vide. ";
 
         if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65] != nullptr){
 

@@ -19,7 +19,7 @@ struct Etat{
     //l and c initial are initial coordinates (where we launch the function)
     //l and c are the current coordinates
 
-    Etat(Board b, Noeud n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr);
+    Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr);
     ~Etat();
 
     std::string informations();

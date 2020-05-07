@@ -1,9 +1,9 @@
 #include "etat.hpp"
 
-Etat::Etat(Board b, Noeud n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr){
+Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr){
     this->b = b;
     
-    this->n = new Noeud(n);
+    this->n = n;
 
     this->hand = l;
 
