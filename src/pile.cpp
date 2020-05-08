@@ -16,9 +16,9 @@ void Pile::empiler(Etat e){
 void Pile::depiler(){
     
     if (etats.size() > 0){
-        std::cout << "Etat dépilé.";
+        //std::cout << "Etat dépilé.";
         etats.pop();
-    } else std::cout << "[ERREUR] Pile vide.";
+    } //else std::cout << "[ERREUR] Pile vide.";
         
 }
 
@@ -59,13 +59,17 @@ void Pile::listerEtats(){
 
     depiler();
 
-    //this->empiler(Etat(temp.b, temp.n->fils[24], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c, temp.horizontal, temp.arriere));
-
+    //Letter is not placed at the position
     if (temp.b(temp.l, temp.c).letter == 0){
 
         //std::cout << "--> (" << temp.l << ", " << temp.c << ") vide. ";
 
-        //+ est dans le noeud
+        /********************/
+        /* This node is served to stock letters that works!
+        /* It's helpfull because to put "Etat" with multiple letters (that are the same)
+        /********************/
+
+        //+ exists on the node
         if (temp.n->fils[26] != nullptr){
 
             //std::cout << "+ dispo. On va vers l'avant. ";
@@ -92,23 +96,33 @@ void Pile::listerEtats(){
 
                 if (temp.n->fils[(int)temp.hand[i].lettre - 65] != nullptr){
 
+                    bool existsAlready = false;
+
                     nbSolutions ++;
 
-                    std::cout << temp.hand[i].lettre << " dispo. ";
-                    
-                    temp.b(temp.l, temp.c).letter = temp.hand[i].lettre;
-                    std::vector<Lettre> hand = temp.hand;
-                    hand.erase(hand.begin() + i);
+                    //std::cout << temp.hand[i].lettre << " dispo. ";
 
-                    if (temp.horizontal){ //horizontal
-                        if (temp.arriere)
-                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
-                    } else { //vertical
-                        if (temp.arriere)
-                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                        else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                    for (int j = 0; j < i; j++){
+                        if (temp.hand[j].lettre == temp.hand[i].lettre)
+                            existsAlready = true;
                     }
+                    
+                    if (!existsAlready){
+                        temp.b(temp.l, temp.c).letter = temp.hand[i].lettre;
+                        std::vector<Lettre> hand = temp.hand;
+                        hand.erase(hand.begin() + i);
+
+                        if (temp.horizontal){ //horizontal
+                            if (temp.arriere)
+                                empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                            else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                        } else { //vertical
+                            if (temp.arriere)
+                                empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                            else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                        }
+                    }
+                    
                     
                 }
 
@@ -117,6 +131,8 @@ void Pile::listerEtats(){
             
             if (nbSolutions == 0)
                 return;
+
+            
 
         }
 

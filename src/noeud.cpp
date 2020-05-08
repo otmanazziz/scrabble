@@ -9,4 +9,5 @@ Noeud::Noeud(const bool &term){
 }
 
 Noeud::~Noeud(){
+
 }

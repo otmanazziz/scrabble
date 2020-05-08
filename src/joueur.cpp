@@ -40,6 +40,10 @@ void Joueur::lister_coups(Board b, Noeud *n){
     std::cout << "Préparation de la liste des coups.. Mais avant regardez le plateau initial avec la main du Joueur.\n";
     p = new Pile();
 
+    if (b(7, 7).letter == 0){
+        p->empiler(Etat(b, n, mainJoueur, 7, 7, 7, 7, false, true));
+    }
+
     /*for (int i = 0; i < 15; i++){
         for (int j = 0; j < 15; j++){
 
@@ -134,20 +138,20 @@ void Joueur::lister_coups(Board b, Noeud *n){
 
             if (line == i && col == j){
                 std::cout << "Letter[" << line << ", " << col << "]\n";
-                p->listerEtats(b, n, mainJoueur, line, col, true);
-                p->listerEtats(b, n, mainJoueur, line, col, false);
+                p->empiler(b, n, mainJoueur, line, col, true);
+                p->empiler(b, n, mainJoueur, line, col, false);
             }
 
         }
     }*/
 
-    p->empiler(Etat(b, n, mainJoueur, 4, 8, 4, 8, true, true));
+    //p->empiler(Etat(b, n, mainJoueur, 4, 8, 4, 8, true, true));
     //std::cout << p->informations();
 
-    std::cout << "Maintenant nous allons lister les coups possibles...\n";
+    //std::cout << "Maintenant nous allons lister les coups possibles...\n";
 
     p->consulterEtats();
-    std::cout << "\n\nTOUT EST TERMINE!\n";
+    //std::cout << "\n\nTOUT EST TERMINE!\n";
     
     //p->empiler(Etat(b, n, mainJoueur));
 
