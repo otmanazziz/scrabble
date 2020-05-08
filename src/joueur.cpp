@@ -141,12 +141,13 @@ void Joueur::lister_coups(Board b, Noeud *n){
         }
     }*/
 
-    p->empiler(Etat(b, n, mainJoueur, 4, 7, 4, 7, true, true));
+    p->empiler(Etat(b, n, mainJoueur, 4, 8, 4, 8, true, true));
     //std::cout << p->informations();
 
     std::cout << "Maintenant nous allons lister les coups possibles...\n";
 
-    p->listerEtats();
+    p->consulterEtats();
+    std::cout << "\n\nTOUT EST TERMINE!\n";
     
     //p->empiler(Etat(b, n, mainJoueur));
 

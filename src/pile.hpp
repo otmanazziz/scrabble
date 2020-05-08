@@ -17,8 +17,10 @@ struct Pile{
 
     Etat getEtat();
 
-    std::string informations();
+    std::string informations(Etat e);
 
     void listerEtats();
+
+    void consulterEtats();
 
 };

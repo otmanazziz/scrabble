@@ -17,6 +17,7 @@ int main() {
   Gaddag g;
   g.recherche("TEST");
   g.recherche("B+ATEAU");
+  g.recherche("EBR+R");
 
   SacLettres *s = new SacLettres();
 
@@ -53,6 +54,13 @@ int main() {
   //std::cout << b << std::endl ;
 
   //faire un test aux coordonnées 9/6 */
+
+  while (true){
+    std::string word;
+    std::cout << "Veuillez entrer un mot: ";
+    std::cin >> word;
+    g.recherche(word);
+  }
 
   return 0 ;
 }
