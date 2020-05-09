@@ -4,6 +4,7 @@
 #include <stack>
 
 #include "etat.hpp"
+#include "gaddag.hpp"
 
 struct Pile{
 
@@ -19,8 +20,10 @@ struct Pile{
 
     std::string informations(Etat e);
 
-    void listerEtats();
+    void listerEtats(Gaddag g);
 
-    void consulterEtats();
+    void consulterEtats(Gaddag g);
+
+    bool wordIsGreat(Gaddag g, Etat e);
 
 };

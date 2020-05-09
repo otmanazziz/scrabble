@@ -17,7 +17,6 @@ int main() {
   Gaddag g;
   g.recherche("TEST");
   g.recherche("B+ATEAU");
-  g.recherche("EBR+R");
 
   SacLettres *s = new SacLettres();
 
@@ -32,10 +31,10 @@ int main() {
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
-  ss << "..............." << std::endl ;
-  ss << "..............." << std::endl ;
-  ss << "..............." << std::endl ;
-  ss << "..............." << std::endl ;
+  ss << ".E......R......" << std::endl ;
+  ss << ".......BATEAU.." << std::endl ;
+  ss << "........R......" << std::endl ;
+  ss << "........ENIGME." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
@@ -47,9 +46,9 @@ int main() {
   b.load(ss);
 
   //std::cout << b(7, 8).letter << std::endl;
-  Noeud *temp = g.fils;
+  //Noeud *temp = g.fils;
   
-  j1.lister_coups(b, temp);
+  j1.lister_coups(b, g);
 
   //std::cout << b << std::endl ;
 

@@ -19,7 +19,7 @@ struct Joueur{
     void recharger(SacLettres *s);
     void retirerLettre(int i);
 
-    void lister_coups(Board b, Noeud *n);
+    void lister_coups(Board b, Gaddag g);
 
     std::string informations();
 

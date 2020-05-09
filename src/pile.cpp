@@ -40,136 +40,149 @@ std::string Pile::informations(Etat e){
     return res;
 }
 
-void Pile::listerEtats(){
+void Pile::listerEtats(Gaddag g){
     Etat temp = etats.top();
-
-    /*std::cout << "\n\nEtats[" << etats.size() << "] Main actuelle du joueur: [";
-    for (int i = 0; i < temp.hand.size(); i++){
-        std::cout << temp.hand[i].informations() << " ";
-    }
-    //std::cout << "] aux coordonnées (" << temp.l << ", " << temp.c << ")\n";
-
-    //std::cout << "Lettres [ ";
-    for (int i = 0; i < 27; i++){
-        if (temp.n->fils[i] != nullptr){
-            std::cout << i << " ";
-        }
-    }
-    //std::cout << "]\n";*/
 
     depiler();
 
-    //Letter is not placed at the position
-    if (temp.b(temp.l, temp.c).letter == 0){
+    
 
-        //std::cout << "--> (" << temp.l << ", " << temp.c << ") vide. ";
+    if (temp.c >= 0 && temp.c <= 14 && temp.l >= 0 && temp.l <= 14){
 
-        /********************/
-        /* This node is served to stock letters that works!
-        /* It's helpfull because to put "Etat" with multiple letters (that are the same)
-        /********************/
+        //Letter is not placed at the position
+        if (temp.b(temp.l, temp.c).letter == 0){
 
-        //+ exists on the node
-        if (temp.n->fils[26] != nullptr){
+            //+ exists on the node
+            if (temp.n->fils[26] != nullptr){
 
-            //std::cout << "+ dispo. On va vers l'avant. ";
-
-            if (temp.horizontal){
-                if (temp.b(temp.l, temp.c - 1).letter == 0){
-                    empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
-                }
-            } else {
-                if (temp.b(temp.l - 1, temp.c).letter == 0){
-                    empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l_initial + 1, temp.c, temp.horizontal, false));
-                }
-            }
-        }
-
-        if (temp.hand.size() == 0){
-            //std::cout << "Main vide. [FIN]\n";
-            return;
-        } else {
-
-            int nbSolutions = 0;
-
-            for (int i = 0; i < temp.hand.size(); i++){
-
-                if (temp.n->fils[(int)temp.hand[i].lettre - 65] != nullptr){
-
-                    bool existsAlready = false;
-
-                    nbSolutions ++;
-
-                    //std::cout << temp.hand[i].lettre << " dispo. ";
-
-                    for (int j = 0; j < i; j++){
-                        if (temp.hand[j].lettre == temp.hand[i].lettre)
-                            existsAlready = true;
-                    }
-                    
-                    if (!existsAlready){
-                        temp.b(temp.l, temp.c).letter = temp.hand[i].lettre;
-                        std::vector<Lettre> hand = temp.hand;
-                        hand.erase(hand.begin() + i);
-
-                        if (temp.horizontal){ //horizontal
-                            if (temp.arriere)
-                                empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                            else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
-                        } else { //vertical
-                            if (temp.arriere)
-                                empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                            else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                //std::cout << "+ dispo. On va vers l'avant. ";
+                if (temp.horizontal){
+                    if (temp.b(temp.l, temp.c - 1).letter == 0){
+                        empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
+                    }/*else{
+                        if (temp.c - 1 < 0){
+                            empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
                         }
+                    }*/
+                } else {
+                    if (temp.b(temp.l - 1, temp.c).letter == 0){
+                        empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l_initial + 1, temp.c, temp.horizontal, false));
+                    } /*else {
+                        if (temp.l - 1 < 0){
+                            empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
+                        }
+                    }*/
+                }
+                
+            }
+
+            if (temp.hand.size() == 0){
+                return;
+            } else {
+
+                for (int i = 0; i < temp.hand.size(); i++){
+
+                    if (temp.n->fils[(int)temp.hand[i].lettre - 65] != nullptr){
+
+                        //std::cout << temp.hand[i].lettre << " dispo. ";
+
+                            temp.b(temp.l, temp.c).letter = temp.hand[i].lettre;
+                            std::vector<Lettre> hand = temp.hand;
+                            hand.erase(hand.begin() + i);
+
+                            if (temp.horizontal){ //horizontal
+                                //if (temp.b(temp.l + 1, temp.c).letter != 0 || temp.b(temp.l - 1, temp.c).letter != 0){
+                                    //if (wordIsGreat(g, temp)){
+                                if (temp.arriere)
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                                else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                                    // }
+                                //}
+                                    
+                            } else { //vertical
+                                    //if (temp.b(temp.l, temp.c + 1).letter != 0 || temp.b(temp.l, temp.c - 1).letter != 0){
+                                            //if (wordIsGreat(g, temp)){
+                                if (temp.arriere)
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                                else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                                            //}
+                                    //}
+                                //}
+                            }       
+                        }
+
+                        //std::cout << temp.informations();
                     }
                     
-                    
+                    //if (nbSolutions == 0)
+                        //return;
                 }
 
-                //std::cout << temp.informations();
-            }
-            
-            if (nbSolutions == 0)
-                return;
+                
 
-            
+
+        } else { // lettre existante
+
+            //std::cout << "--> (" << temp.l << ", " << temp.c << ") non vide. ";
+
+            if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65] != nullptr){
+
+                //std::cout << temp.b(temp.l, temp.c) << " dispo. ";
+
+                if (temp.horizontal){ //horizontal
+                    if (temp.arriere)
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                    else
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                } else { //vertical
+                    if (temp.arriere)
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                    else
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                }
+            } else return;
 
         }
 
-    } else { // lettre existante
-
-        //std::cout << "--> (" << temp.l << ", " << temp.c << ") non vide. ";
-
-        if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65] != nullptr){
-
-            //std::cout << temp.b(temp.l, temp.c) << " dispo. ";
-
-            if (temp.horizontal){ //horizontal
-                if (temp.arriere)
-                    empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                else empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
-            } else { //vertical
-                if (temp.arriere)
-                    empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                else empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
-            }
-        } else return;
-
+        if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65]->terminal){
+            //std::cout << "Nous avons une solution!\n";
+            std::cout << informations(temp);
+        }
     }
-
-    if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65]->terminal){
-        //std::cout << "Nous avons une solution!\n";
-        std::cout << informations(temp);
-    }
-
     //std::cout << informations(temp);
 
     //this->listerEtats();
 
 }
 
-void Pile::consulterEtats(){
+void Pile::consulterEtats(Gaddag g){
     while (etats.size() > 0){
-        listerEtats();
+        listerEtats(g);
     }
+}
+
+bool Pile::wordIsGreat(Gaddag g, Etat e){
+    std::string word = "";
+
+    int line = e.l;
+    int col = e.c;
+
+    if (e.horizontal){
+        while (e.b(line - 1, col).letter != 0 && line - 1 >= 0){
+            line --;
+        }
+        while(e.b(line, col).letter != 0 && line <= 14){
+            word.push_back(e.b(line, col).letter);
+        }
+    } else {
+        while (e.b(line, col - 1).letter != 0 && col - 1 >= 0){
+            col --;
+        }
+        while(e.b(line, col).letter != 0 && col <= 14){
+            word.push_back(e.b(line, col).letter);
+        }
+    }
+
+    return g.recherche(word);
+
 }
