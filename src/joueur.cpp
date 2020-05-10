@@ -29,7 +29,7 @@ std::string Joueur::informations(){
     else {
         std::string res;
         res += "La main du joueur : ";
-        for (int i = 0; i < mainJoueur.size(); i++){
+        for (unsigned int i = 0; i < mainJoueur.size(); i++){
             res += mainJoueur[i].informations() + " ";
         }
         return res + "\n";

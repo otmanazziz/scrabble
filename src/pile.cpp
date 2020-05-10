@@ -54,24 +54,15 @@ void Pile::listerEtats(Gaddag g){
 
             //+ exists on the node
             if (temp.n->fils[26] != nullptr){
-
                 //std::cout << "+ dispo. On va vers l'avant. ";
                 if (temp.horizontal){
-                    if (temp.b(temp.l, temp.c - 1).letter == 0){
+                    if ((temp.b(temp.l, temp.c - 1).letter == 0) || ((temp.c - 1) < 0)) 
                         empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
-                    }/*else{
-                        if (temp.c - 1 < 0){
-                            empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
-                        }
-                    }*/
-                } else {
-                    if (temp.b(temp.l - 1, temp.c).letter == 0){
+                }
+                else 
+                {
+                    if ((temp.b(temp.l - 1, temp.c).letter == 0) || ((temp.l - 1) < 0))
                         empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l_initial + 1, temp.c, temp.horizontal, false));
-                    } /*else {
-                        if (temp.l - 1 < 0){
-                            empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
-                        }
-                    }*/
                 }
                 
             }
@@ -80,7 +71,7 @@ void Pile::listerEtats(Gaddag g){
                 return;
             } else {
 
-                for (int i = 0; i < temp.hand.size(); i++){
+                for (unsigned int i = 0; i < temp.hand.size(); i++){
 
                     if (temp.n->fils[(int)temp.hand[i].lettre - 65] != nullptr){
 
@@ -93,23 +84,25 @@ void Pile::listerEtats(Gaddag g){
                             if (temp.horizontal){ //horizontal
                                 //if (temp.b(temp.l + 1, temp.c).letter != 0 || temp.b(temp.l - 1, temp.c).letter != 0){
                                     //if (wordIsGreat(g, temp)){
-                                if (temp.arriere)
+                                if (temp.arriere){
                                     empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
-                                else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
-                                    // }
+                                }else if(!temp.arriere){
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                                     }
                                 //}
                                     
-                            } else { //vertical
+                            } else if(!temp.horizontal){ //vertical
                                     //if (temp.b(temp.l, temp.c + 1).letter != 0 || temp.b(temp.l, temp.c - 1).letter != 0){
                                             //if (wordIsGreat(g, temp)){
                                 if (temp.arriere)
                                     empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
-                                else empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                                else if(!temp.arriere)
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
                                             //}
                                     //}
                                 //}
                             }       
-                        }
+                        }else return;
 
                         //std::cout << temp.informations();
                     }
