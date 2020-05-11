@@ -45,8 +45,6 @@ void Pile::listerEtats(Gaddag g){
 
     depiler();
 
-    
-
     if (temp.c >= 0 && temp.c <= 14 && temp.l >= 0 && temp.l <= 14){
 
         //Letter is not placed at the position
@@ -85,9 +83,9 @@ void Pile::listerEtats(Gaddag g){
                                 //if (temp.b(temp.l + 1, temp.c).letter != 0 || temp.b(temp.l - 1, temp.c).letter != 0){
                                     //if (wordIsGreat(g, temp)){
                                 if (temp.arriere){
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                                 }else if(!temp.arriere){
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                                      }
                                 //}
                                     
@@ -95,14 +93,14 @@ void Pile::listerEtats(Gaddag g){
                                     //if (temp.b(temp.l, temp.c + 1).letter != 0 || temp.b(temp.l, temp.c - 1).letter != 0){
                                             //if (wordIsGreat(g, temp)){
                                 if (temp.arriere)
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                                 else if(!temp.arriere)
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                                             //}
                                     //}
                                 //}
                             }       
-                        }else return;
+                        } else return;
 
                         //std::cout << temp.informations();
                     }
@@ -124,14 +122,14 @@ void Pile::listerEtats(Gaddag g){
 
                 if (temp.horizontal){ //horizontal
                     if (temp.arriere)
-                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere));
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                     else
-                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere));
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                 } else { //vertical
                     if (temp.arriere)
-                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere));
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                     else
-                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere));
+                        empiler(Etat(temp.b, temp.n->fils[temp.b(temp.l, temp.c).letter - 65], temp.hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere, temp.b(temp.l, temp.c).letter));
                 }
             } else return;
 
@@ -140,6 +138,7 @@ void Pile::listerEtats(Gaddag g){
         if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65]->terminal){
             //std::cout << "Nous avons une solution!\n";
             std::cout << informations(temp);
+            temp.calculerPoints();
         }
     }
     //std::cout << informations(temp);

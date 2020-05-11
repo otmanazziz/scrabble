@@ -44,7 +44,7 @@ void Joueur::lister_coups(Board b, Gaddag g){
     if (b(7, 7).letter == 0){
         p->empiler(Etat(b, racine, mainJoueur, 7, 7, 7, 7, false, true));
     } else {
-        /*for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++){
             for (int j = 0; j < 15; j++){
 
                 int line, col;
@@ -138,23 +138,13 @@ void Joueur::lister_coups(Board b, Gaddag g){
 
                 if (line == i && col == j){
                     std::cout << "Letter[" << line << ", " << col << "]\n";
-                    p->empiler(b, n, mainJoueur, line, col, true);
-                    p->empiler(b, n, mainJoueur, line, col, false);
+                    p->empiler(Etat(b, racine, mainJoueur, line, col, line, col, true, true));
+                    p->empiler(Etat(b, racine, mainJoueur, line, col, line, col, false, true));
                 }
 
             }
-        }*/
-
-        p->empiler(Etat(b, racine, mainJoueur, 5, 1, 5, 1, true, true));
-        //std::cout << p->informations();
-
-        //std::cout << "Maintenant nous allons lister les coups possibles...\n";
-
+        }
     }
     p->consulterEtats(g);
-    //std::cout << "\n\nTOUT EST TERMINE!\n";
-    
-    //p->empiler(Etat(b, n, mainJoueur));
-
     
 }
