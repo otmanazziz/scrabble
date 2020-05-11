@@ -23,8 +23,9 @@ void Pile::depiler(){
 }
 
 Etat Pile::getEtat(){
-    if (!etats.empty())
+    if (!etats.empty()){
         return etats.top();
+    }    
 }
 
 std::string Pile::informations(Etat e){
@@ -40,12 +41,12 @@ std::string Pile::informations(Etat e){
     return res;
 }
 
-void Pile::listerEtats(Gaddag g){
+void Pile::listerEtats(){
     Etat temp = etats.top();
 
     depiler();
 
-    if (temp.c >= 0 && temp.c <= 14 && temp.l >= 0 && temp.l <= 14){
+    if (temp.c <= 14 && temp.l <= 14){
 
         //Letter is not placed at the position
         if (temp.b(temp.l, temp.c).letter == 0){
@@ -54,12 +55,12 @@ void Pile::listerEtats(Gaddag g){
             if (temp.n->fils[26] != nullptr){
                 //std::cout << "+ dispo. On va vers l'avant. ";
                 if (temp.horizontal){
-                    if ((temp.b(temp.l, temp.c - 1).letter == 0) || ((temp.c - 1) < 0)) 
+                    if (temp.b(temp.l, temp.c - 1).letter == 0)
                         empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l, temp.c_initial + 1, temp.horizontal, false));
                 }
                 else 
                 {
-                    if ((temp.b(temp.l - 1, temp.c).letter == 0) || ((temp.l - 1) < 0))
+                    if (temp.b(temp.l - 1, temp.c).letter == 0)
                         empiler(Etat(temp.b, temp.n->fils[26], temp.hand, temp.l_initial, temp.c_initial, temp.l_initial + 1, temp.c, temp.horizontal, false));
                 }
                 
@@ -138,7 +139,7 @@ void Pile::listerEtats(Gaddag g){
         if (temp.n->fils[temp.b(temp.l, temp.c).letter - 65]->terminal){
             //std::cout << "Nous avons une solution!\n";
             std::cout << informations(temp);
-            temp.calculerPoints();
+            //temp.calculerPoints();
         }
     }
     //std::cout << informations(temp);
@@ -147,27 +148,27 @@ void Pile::listerEtats(Gaddag g){
 
 }
 
-void Pile::consulterEtats(Gaddag g){
+void Pile::consulterEtats(){
     while (etats.size() > 0){
-        listerEtats(g);
+        listerEtats();
     }
 }
 
 bool Pile::wordIsGreat(Gaddag g, Etat e){
     std::string word = "";
 
-    int line = e.l;
-    int col = e.c;
+    unsigned int line = e.l;
+    unsigned int col = e.c;
 
     if (e.horizontal){
-        while (e.b(line - 1, col).letter != 0 && line - 1 >= 0){
+        while (e.b(line - 1, col).letter != 0){
             line --;
         }
         while(e.b(line, col).letter != 0 && line <= 14){
             word.push_back(e.b(line, col).letter);
         }
     } else {
-        while (e.b(line, col - 1).letter != 0 && col - 1 >= 0){
+        while (e.b(line, col - 1).letter != 0){
             col --;
         }
         while(e.b(line, col).letter != 0 && col <= 14){

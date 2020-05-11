@@ -1,7 +1,7 @@
 #include "Lettre.hpp"
 
 //constructor
-Lettre::Lettre(const char &lalettre, const int &lepoint){
+Lettre::Lettre(const char &lalettre, const unsigned int &lepoint){
     lettre = lalettre;
     points = lepoint;
 }
@@ -12,8 +12,7 @@ Lettre::Lettre(const Lettre &temp){
 }
 
 Lettre::~Lettre(){
-    lettre = NULL;
-    points = NULL;
+
 }
 
 std::string Lettre::informations(){

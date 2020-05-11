@@ -12,12 +12,12 @@ struct Joueur{
     Pile *p;
 
     //static
-    static const int tailleMainJoueur = 7;
+    static const unsigned int tailleMainJoueur = 7;
 
     Joueur(SacLettres *s);
 
     void recharger(SacLettres *s);
-    void retirerLettre(int i);
+    void retirerLettre(unsigned int i);
 
     void lister_coups(Board b, Gaddag g);
 

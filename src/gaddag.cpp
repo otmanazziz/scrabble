@@ -42,8 +42,8 @@ void Gaddag::insertion(std::string word){
 void Gaddag::classicInsertion(std::string word){
     Noeud *temp = fils;
     bool term = false;
-    int index;
-    for (int i = 0; i < word.length(); i++){
+    unsigned int index;
+    for (unsigned int i = 0; i < word.length(); i++){
         //check if the "+" is the current letter
         if (word.at(i) == '+')
             index = 26;
@@ -69,10 +69,10 @@ void Gaddag::plusInsertion(std::string word){
     std::string temp(word.length() + 1, '_');
     //std::cout << temp << std::endl;
 
-    for (int i = 1; i < word.length() + 1; i++){
+    for (unsigned int i = 1; i < word.length() + 1; i++){
         temp[i] = '+';
         
-        for (int j = 0; j < word.length(); j++){
+        for (unsigned int j = 0; j < word.length(); j++){
             if (j < i)
                 temp[j] = word[i-j-1];
             else
@@ -91,8 +91,8 @@ void Gaddag::plusInsertion(std::string word){
 bool Gaddag::recherche(std::string word){
     std::cout << "Search for the letter " << word << "...";
     Noeud *temp = fils;
-    int index;
-    for (int i = 0; i < word.length(); i++){
+    unsigned int index;
+    for (unsigned int i = 0; i < word.length(); i++){
         if (word.at(i) == '+')
             index = 26;
         else index = (int)word.at(i) - 65;

@@ -15,14 +15,14 @@ struct Etat{
     Noeud *n;
     std::vector<Lettre> hand;
     bool horizontal, arriere;
-    int l_initial, c_initial, l, c;
+    unsigned int l_initial, c_initial, l, c;
     std::string mot;
-    int nbPoints;
+    unsigned int nbPoints;
     //l and c initial are initial coordinates (where we launch the function)
     //l and c are the current coordinates
 
-    Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr);
-    Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr, char lettre);
+    Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr);
+    Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr, char lettre);
 
     void calculerPoints();
 

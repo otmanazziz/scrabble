@@ -20,9 +20,9 @@ struct Pile{
 
     std::string informations(Etat e);
 
-    void listerEtats(Gaddag g);
+    void listerEtats();
 
-    void consulterEtats(Gaddag g);
+    void consulterEtats();
 
     bool wordIsGreat(Gaddag g, Etat e);
 

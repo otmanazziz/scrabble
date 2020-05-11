@@ -2,8 +2,8 @@
 
 //constructor
 SacLettres::SacLettres(){
-    for (int i = 0; i < 26; i++){
-        for (int k = 0; k < lettresOccurences[i]; k++){
+    for (unsigned int i = 0; i < 26; i++){
+        for (unsigned int k = 0; k < lettresOccurences[i]; k++){
             sacLettres.push_back(Lettre((char)(i + 'A'), lettresPoints[i]));
         }
     }
@@ -15,7 +15,7 @@ SacLettres::~SacLettres(){
 
 Lettre SacLettres::recupererLettre(){
     if (!sacVide()){
-        int random = rand() % sacLettres.size();
+        unsigned int random = rand() % sacLettres.size();
         std::cout << "[" << random << "] for max case " << sacLettres.size() << std::endl;
         Lettre temp(sacLettres[random].lettre, sacLettres[random].points);
 
@@ -34,7 +34,7 @@ bool SacLettres::sacVide(){
 
 void SacLettres::lettresRestantes(){
     std::cout << "Il reste " << sacLettres.size() << " lettres dans ce putain de sac à lettres." << std::endl;
-    for (int i = 0; i < sacLettres.size(); i++){
+    for (unsigned int i = 0; i < sacLettres.size(); i++){
         std::cout << sacLettres[i].lettre << " -> " << sacLettres[i].points << std::endl;
     }
 }

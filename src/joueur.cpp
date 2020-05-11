@@ -1,7 +1,7 @@
 #include "joueur.hpp"
 
 Joueur::Joueur(SacLettres *s){
-    for (int i = 0; i < tailleMainJoueur; i++){
+    for (unsigned int i = 0; i < tailleMainJoueur; i++){
         if (!s->sacVide())
             mainJoueur.push_back(s->recupererLettre());
         else break;
@@ -16,8 +16,8 @@ void Joueur::recharger(SacLettres *s){
     }
 }
 
-void Joueur::retirerLettre(int i){
-    if (i >= 0 && mainJoueur.size() > 0){
+void Joueur::retirerLettre(unsigned int i){
+    if (mainJoueur.size() > 0){
         std::cout << "Retirer lettre " << i << std::endl;
         mainJoueur.erase(mainJoueur.begin() + i);
     }
@@ -43,11 +43,12 @@ void Joueur::lister_coups(Board b, Gaddag g){
 
     if (b(7, 7).letter == 0){
         p->empiler(Etat(b, racine, mainJoueur, 7, 7, 7, 7, false, true));
+        p->empiler(Etat(b, racine, mainJoueur, 7, 7, 7, 7, true, true));
     } else {
-        for (int i = 0; i < 15; i++){
-            for (int j = 0; j < 15; j++){
+        for (unsigned int i = 0; i < 15; i++){
+            for (unsigned int j = 0; j < 15; j++){
 
-                int line, col;
+                unsigned int line, col;
 
                 if (b(i, j).letter == 0){
                     if (i > 0 && i < 14 && j > 0 && j < 14){
@@ -145,6 +146,6 @@ void Joueur::lister_coups(Board b, Gaddag g){
             }
         }
     }
-    p->consulterEtats(g);
+    p->consulterEtats();
     
 }

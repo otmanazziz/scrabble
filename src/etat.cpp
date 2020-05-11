@@ -1,6 +1,6 @@
 #include "etat.hpp"
 
-Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr){
+Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr){
     this->b = b;
     
     this->n = n;
@@ -15,7 +15,7 @@ Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll,
     this->arriere = arr;
 }
 
-Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, int lini, int cini, int ll, int cc, bool hori, bool arr, char lettre){
+Etat::Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr, char lettre){
     this->b = b;
     
     this->n = n;
@@ -37,10 +37,10 @@ std::string Etat::informations(){
 
     //b(7, 8).letter = 'K';
 
-    for (int i = 0; i < 15; i++){
-        for (int j = 0; j < 15; j++){
+    for (unsigned int i = 0; i < 15; i++){
+        for (unsigned int j = 0; j < 15; j++){
             res += " ";
-            if (b(i, j).letter == NULL)
+            if (b(i, j).letter == 0)
                 res += "_";
             else res.push_back(b(i, j).letter);
             res += " ";
@@ -50,12 +50,9 @@ std::string Etat::informations(){
 
     res += "\n\n************-== HAND PLAYER ==-************\n\n";
     res += "Hand [ ";
-    for (int i = 0; i < hand.size(); i++){
+    for (unsigned int i = 0; i < hand.size(); i++){
         res += hand[i].informations() + " ";
     }
-    res += "] pour ";
-    res += std::to_string(nbPoints);
-    res += " points.";
 
     res += "\n\n************-==========-************\n\n";
     return res;
@@ -63,10 +60,10 @@ std::string Etat::informations(){
 
 void Etat::calculerPoints(){
 
-    const int lettresPoints[26] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 10, 1, 2, 1, 1, 3, 2, 1, 1, 1, 1, 4, 10, 10, 10, 10};
-    int points = 0;
+    const unsigned int lettresPoints[26] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 10, 1, 2, 1, 1, 3, 2, 1, 1, 1, 1, 4, 10, 10, 10, 10};
+    unsigned int points = 0;
 
-    for (int i = 0; i < mot.length(); i++){
+    for (unsigned int i = 0; i < mot.length(); i++){
 
         points += lettresPoints[(int)mot.at(i) - 65];
 
