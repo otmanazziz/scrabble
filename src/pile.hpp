@@ -9,6 +9,7 @@
 struct Pile{
 
     std::stack<Etat> etats;
+    std::stack<Etat> greatWords;
 
     Pile();
     ~Pile();
@@ -25,5 +26,7 @@ struct Pile{
     void consulterEtats();
 
     bool wordIsGreat(Gaddag g, Etat e);
+
+    void meilleurCoup();
 
 };

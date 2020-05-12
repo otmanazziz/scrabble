@@ -10,6 +10,7 @@ struct Joueur{
     //variables
     std::vector<Lettre> mainJoueur;
     Pile *p;
+    unsigned int nbPoints;
 
     //static
     static const unsigned int tailleMainJoueur = 7;
@@ -19,7 +20,7 @@ struct Joueur{
     void recharger(SacLettres *s);
     void retirerLettre(unsigned int i);
 
-    void lister_coups(Board b, Gaddag g);
+    Board lister_coups(Board b, Gaddag g);
 
     std::string informations();
 

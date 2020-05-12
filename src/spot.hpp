@@ -9,14 +9,14 @@
 struct Spot {
   //default initialization, no letter, no bonus
   Spot() :
-    letter(0)
+    letter(0), points(0)
   {}
 
   //bonus spot initialization
   // * lf is the bonus letter factor
   // * wf is the bonus word factor
   Spot(unsigned char lf, unsigned char wf) :
-    letter(0), bonus(lf, wf)
+    letter(0), points(0), bonus(lf, wf)
   {}
 
   //the letter placed on the spot, 0 if none
@@ -24,6 +24,8 @@ struct Spot {
 
   //the bonus present on the spot
   Bonus bonus ;
+
+  unsigned int points;
 } ;
 
 //display of the spot contents

@@ -6,6 +6,7 @@ Joueur::Joueur(SacLettres *s){
             mainJoueur.push_back(s->recupererLettre());
         else break;
     }
+    nbPoints = 0;
 }
 
 void Joueur::recharger(SacLettres *s){
@@ -24,19 +25,21 @@ void Joueur::retirerLettre(unsigned int i){
 }
 
 std::string Joueur::informations(){
+    std::string res;
     if (mainJoueur.size() == 0)
-        return "La main du joueur est vide.";
+        res += "La main du joueur est vide. ";
     else {
-        std::string res;
         res += "La main du joueur : ";
         for (unsigned int i = 0; i < mainJoueur.size(); i++){
             res += mainJoueur[i].informations() + " ";
         }
-        return res + "\n";
     }
+    res += "[Points] ";
+    res += std::to_string(nbPoints);
+    return res + " points.\n";
 }
 
-void Joueur::lister_coups(Board b, Gaddag g){
+Board Joueur::lister_coups(Board b, Gaddag g){
     std::cout << "Préparation de la liste des coups.. Mais avant regardez le plateau initial avec la main du Joueur.\n";
     p = new Pile();
     Noeud *racine = g.fils;
@@ -147,5 +150,13 @@ void Joueur::lister_coups(Board b, Gaddag g){
         }
     }
     p->consulterEtats();
+
+    if (p->greatWords.size() == 1){
+        mainJoueur = p->greatWords.top().hand;
+
+        nbPoints += p->greatWords.top().nbPoints;
+
+        return p->greatWords.top().b;
+    }
     
 }

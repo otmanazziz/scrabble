@@ -22,9 +22,7 @@ struct Etat{
     //l and c are the current coordinates
 
     Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr);
-    Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr, char lettre);
-
-    void calculerPoints();
+    Etat(Board b, Noeud *n, std::vector<Lettre> l, unsigned int lini, unsigned int cini, unsigned int ll, unsigned int cc, bool hori, bool arr, unsigned int nbPoints);
 
     std::string informations();
 

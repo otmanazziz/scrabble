@@ -22,7 +22,7 @@ int main() {
 
   Joueur j1(s);
 
-  Board b ;
+  Board b;
 
   std::stringstream ss ;
   ss << "..............." << std::endl ;
@@ -32,7 +32,7 @@ int main() {
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
-  ss << ".......B......." << std::endl ;
+  ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
   ss << "..............." << std::endl ;
@@ -42,23 +42,22 @@ int main() {
   ss << "..............." << std::endl ;
   
   b.save(ss);
-
   b.load(ss);
 
-  //std::cout << b(7, 8).letter << std::endl;
-  //Noeud *temp = g.fils;
-  
-  j1.lister_coups(b, g);
+  //std::cout << b;
 
-  //std::cout << b << std::endl ;
+  while (!s->sacVide()){
+    b = j1.lister_coups(b, g);
+    std::cout << b;
+    std::cout << j1.informations();
 
-  //faire un test aux coordonnées 9/6 */
+    
+    do{
+      std::cout << "Please press any key to continue...";
+    }
+    while (std::cin.get() != '\n');
 
-  while (true){
-    std::string word;
-    std::cout << "Veuillez entrer un mot: ";
-    std::cin >> word;
-    g.recherche(word);
+    j1.recharger(s);
   }
 
   return 0 ;
