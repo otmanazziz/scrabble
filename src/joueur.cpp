@@ -149,7 +149,7 @@ Board Joueur::lister_coups(Board b, Gaddag g){
             }
         }
     }
-    p->consulterEtats();
+    p->consulterEtats(g);
 
     if (p->greatWords.size() == 1){
         mainJoueur = p->greatWords.top().hand;

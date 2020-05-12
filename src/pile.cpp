@@ -35,7 +35,7 @@ std::string Pile::informations(Etat e){
     return res;
 }
 
-void Pile::listerEtats(){
+void Pile::listerEtats(Gaddag g){
     Etat temp = etats.top();
 
     depiler();
@@ -67,8 +67,6 @@ void Pile::listerEtats(){
 
                     if (temp.n->fils[(int)temp.hand[i].lettre - 65] != nullptr){
 
-                        //std::cout << temp.hand[i].lettre << " dispo. ";
-
                             std::vector<Lettre> hand = temp.hand;
                             temp.b(temp.l, temp.c).letter = hand[i].lettre;
                             temp.b(temp.l, temp.c).points = hand[i].points;
@@ -78,31 +76,27 @@ void Pile::listerEtats(){
                             if (temp.horizontal){ //horizontal
                                 //if (temp.b(temp.l + 1, temp.c).letter != 0 || temp.b(temp.l - 1, temp.c).letter != 0){
                                     //if (wordIsGreat(g, temp)){
-                                if (temp.arriere){
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere, points));
-                                }else if(!temp.arriere){
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere, points));
-                                     }
+                                        if (temp.arriere){
+                                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c - 1, temp.horizontal, temp.arriere, points));
+                                        }else if(!temp.arriere){
+                                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l, temp.c + 1, temp.horizontal, temp.arriere, points));
+                                        }
+                                    //}
                                 //}
                                     
                             } else if(!temp.horizontal){ //vertical
-                                    //if (temp.b(temp.l, temp.c + 1).letter != 0 || temp.b(temp.l, temp.c - 1).letter != 0){
-                                            //if (wordIsGreat(g, temp)){
-                                if (temp.arriere)
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere, points));
-                                else if(!temp.arriere)
-                                    empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere, points));
-                                            //}
+                                //if (temp.b(temp.l, temp.c + 1).letter != 0 || temp.b(temp.l, temp.c - 1).letter != 0){
+                                    //if (wordIsGreat(g, temp)){
+                                        if (temp.arriere)
+                                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l - 1, temp.c, temp.horizontal, temp.arriere, points));
+                                        else if(!temp.arriere)
+                                            empiler(Etat(temp.b, temp.n->fils[(int)temp.hand[i].lettre - 65], hand, temp.l_initial, temp.c_initial, temp.l + 1, temp.c, temp.horizontal, temp.arriere, points));
                                     //}
                                 //}
+                                
                             }       
                     }
-
-                        //std::cout << temp.informations();
                 }
-                    
-                    //if (nbSolutions == 0)
-                        //return;
             }
 
                 
@@ -143,15 +137,15 @@ void Pile::listerEtats(){
 
 }
 
-void Pile::consulterEtats(){
+void Pile::consulterEtats(Gaddag g){
     while (etats.size() > 0){
-        listerEtats();
+        listerEtats(g);
     }
     meilleurCoup();
 }
 
 bool Pile::wordIsGreat(Gaddag g, Etat e){
-    std::string word = "";
+    std::string word;
 
     unsigned int line = e.l;
     unsigned int col = e.c;
@@ -161,14 +155,14 @@ bool Pile::wordIsGreat(Gaddag g, Etat e){
             line --;
         }
         while(e.b(line, col).letter != 0 && line <= 14){
-            word.push_back(e.b(line, col).letter);
+            word += e.b(line, col).letter;
         }
     } else {
         while (e.b(line, col - 1).letter != 0){
             col --;
         }
         while(e.b(line, col).letter != 0 && col <= 14){
-            word.push_back(e.b(line, col).letter);
+            word += e.b(line, col).letter;
         }
     }
 
